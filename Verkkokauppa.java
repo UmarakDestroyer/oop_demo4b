@@ -8,13 +8,13 @@ public class Verkkokauppa {
     private ArrayList<Ostotapahtuma> tapahtumat;
     private String asiakkaatTiedosto;
     private String myyjatTiedosto;
-    private String tuoteetTiedosto;
+    private String tuotteetTiedosto;
     private String tapahtumatTiedosto;
 
     public Verkkokauppa() {	
 	 this.asiakkaatTiedosto = "Asiakkaat.csv";
    	 this.myyjatTiedosto = "Myyjat.csv";
-         this.tuoteetTiedosto = "Tuoteet.csv";
+         this.tuotteetTiedosto = "Tuoteet.csv";
          this.tapahtumatTiedosto = "Tapahtumat.csv";
 
 	try{
@@ -25,10 +25,10 @@ public class Verkkokauppa {
 	try{
 		this.tuotteet = VerkkokauppaIO.lueTuotteet(this.myyjatTiedosto);
 	} catch(Exception e){
-		this.tuotteet = ArrayList<>();
+		this.tuotteet = new ArrayList<>();
 	}
 	try{
-		this.myyjat = VerkkokauppaIO.lueMyyjat(this.tuoteetTiedosto);
+		this.myyjat = VerkkokauppaIO.lueMyyjat(this.tuotteetTiedosto);
 	} catch(Exception e){
         	myyjat = new ArrayList<>();
 	}
@@ -39,9 +39,9 @@ public class Verkkokauppa {
 	}
     }
     public void tallennaTiedot(){
-	VerkkokauppaIO.kirjoitaAsiakkaat(this.asiakkaat, this.asiakaatTiedosto);
+	VerkkokauppaIO.kirjoitaAsiakkaat(this.asiakkaat, this.asiakkaatTiedosto);
 	VerkkokauppaIO.kirjoitaMyyjat(this.myyjat, this.myyjatTiedosto);
-	VerkkokauppaIO.kirjoitaTuotteet(this.tuoteet, this.tuotteetTiedosto);
+	VerkkokauppaIO.kirjoitaTuotteet(this.tuotteet, this.tuotteetTiedosto);
 	VerkkokauppaIO.kirjoitaOstotapahtumat(this.tapahtumat, this.tapahtumatTiedosto);
     }
 
