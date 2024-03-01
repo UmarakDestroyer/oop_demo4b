@@ -56,12 +56,12 @@ public class VerkkokauppaIO {
         String data = "";
         for (Asiakas asiakas : asiakasLista) {
 	    if( asiakas instanceof KantaAsiakas){
-		data = String.valueOf(((KantaAsiakas) asiakas).getAlennusProsentti())+VerkkokauppaIO.EROTIN;
+		data = String.valueOf(((KantaAsiakas) asiakas).getAlennusprosentti())+VerkkokauppaIO.EROTIN;
 	    }
 	    else{
 		data = "0"+VerkkokauppaIO.EROTIN;
 	    }
-            data += asiakaskgetData(VerkkokauppaIO.EROTIN);
+            data += asiakas.getData(VerkkokauppaIO.EROTIN);
             data += "\n";
         }
         // Poistetaan viimeinen "turha" rivinvaihto
@@ -83,7 +83,7 @@ public class VerkkokauppaIO {
     public static Asiakas parsiAsiakas(String data) {
         String[] tiedot = data.split(VerkkokauppaIO.EROTIN);
         // Tässä vaiheessa tulee tietää tietojen järjestys
-	String alennus = Double.parseDouble(tiedot[0]);
+	double alennus = Double.parseDouble(tiedot[0]);
         String asNro = tiedot[1];
         String nimi = tiedot[2];
         double ostot = Double.parseDouble(tiedot[3]);
@@ -91,7 +91,7 @@ public class VerkkokauppaIO {
         	return new Asiakas(asNro, nimi, ostot);
 	}
 	else{
-		return new KantaAsiakas(asNro, nimi, ostot, alennus);
+		return new KantaAsiakas(asNro, nimi, ostot, (int)alennus);
 	}
     }
 
